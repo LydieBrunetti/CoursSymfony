@@ -1,12 +1,18 @@
 {% extends 'racine.html.twig' %}
 
-
-
-
 {% block body %}
 
-{% include 'nav.html.twig' %}
+{% block nav %}{% include 'nav.html.twig' %}{% endblock %}
 
 {% block content %}{% endblock %}
+
+{% block footer %}
+<div class="text-center">
+    <p>Rencontre.com -2019</p>
+</div>
+{% endblock %}
         
 {% endblock %}
+
+
+
