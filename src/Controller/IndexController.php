@@ -3,7 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Newsletter;
+use App\Form\NewsLetterType;
+use App\Repository\NewsletterRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
@@ -11,17 +15,23 @@ class IndexController extends AbstractController
     /**
      * @Route("/", name="homepage")
      */
-    public function homepage()
+    public function homepage(Request $request, EntityManagerInterface $entityManager)
     {
-        $entityManager = $this->getDoctrine()->getManager();
+        // $entityManager = $this->getDoctrine()->getManager();
+
+  //      $newsletterItem = $newsletterRepository->createNewsletterEmail("mimi@wanadoo.fr");
         $newsletterItem = new Newsletter();
-        $newsletterItem->setEmail("lydie@orange.fr")->setSubscribed(true);
-        $entityManager->persist($newsletterItem);
-        $entityManager->flush();
+        $form = $this->createForm(NewsLetterType::class, $newsletterItem);
+        $form->handleRequest($request);
 
-
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($newsletterItem);
+            $entityManager->flush();
+        }
+        
         return $this->render('index/index.html.twig', [
             'newsletterItem' => $newsletterItem,
+            'form' => $form->createView(),
         ]);
     }
 

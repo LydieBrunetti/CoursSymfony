@@ -19,6 +19,20 @@ class NewsletterRepository extends ServiceEntityRepository
         parent::__construct($registry, Newsletter::class);
     }
 
+    public function createNewsletterEmail(string $email, bool $subscribed = true): Newsletter
+    {
+        $entityManager = $this->getEntityManager();
+
+        $newsletterItem = new Newsletter();
+        $newsletterItem->setEmail($email)
+        ->setSubscribed($subscribed);
+
+        $entityManager->persist($newsletterItem);
+        $entityManager->flush();
+
+        return $newsletterItem;
+    }
+
      /**
       * @return Newsletter[] Returns an array of Newsletter objects
       */
