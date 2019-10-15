@@ -27,7 +27,7 @@
                 <td>{{ newsletter.id }}</td>
                 <td>{{ newsletter.created ? newsletter.created|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ path('admin_newsletter_show', {'id': newsletter.id}) }}">Voir la fiche</a>
+                    <a class="btn btn-primary" href="{{ path('admin_newsletter_show', {'id': newsletter.id}) }}"><i class="fa fa-eye"></i></a>
                     <a class="btn btn-light" href="{{ path('admin_newsletter_edit', {'id': newsletter.id}) }}">Editer</a>
                 </td>
             </tr>

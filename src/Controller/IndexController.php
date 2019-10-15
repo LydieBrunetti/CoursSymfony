@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
 use App\Entity\Newsletter;
+use App\Form\ContactType;
 use App\Form\NewsLetterRegisterType;
 use App\Repository\NewsletterRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -38,10 +40,28 @@ class IndexController extends AbstractController
     /**
      * @Route("/contact", name="contact")
      */
-    public function contact()
+    public function contact(Request $request, EntityManagerInterface $entityManager)
     {
+        $contactItem = new Contact();
+        $form = $this->createForm(ContactType::class, $contactItem);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($contactItem);
+            $entityManager->flush();
+
+            $this->addFlash(
+                'notice',
+                'Votre demande de contact a bien été envoyée !'
+            );
+
+            return $this->redirectToRoute('homepage');
+        }
+
+
         return $this->render('index/contact.html.twig', [
-            'controller_name' => 'ContactController',
+            'contactItem' => $contactItem,
+            'form' => $form->createView(),
         ]);
     }
 
