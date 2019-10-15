@@ -1,0 +1,22 @@
+{% extends 'admin/contact/index.html.twig' %}
+
+{% block title %}Editer{% endblock %}
+
+{% block content %}
+    <h1>Editer un contact</h1>
+    <br>
+
+    <div class="container">
+    
+
+    {{ include('newsletter/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+    <br>
+
+    <a class="btn btn-primary" href="{{ path('admin_newsletter_index') }}">Retour à la liste</a>
+    <br>
+
+    {{ include('newsletter/_delete_form.html.twig') }}
+
+    
+    </div>
+{% endblock %}

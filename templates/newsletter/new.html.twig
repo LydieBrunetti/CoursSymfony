@@ -1,0 +1,21 @@
+{% extends 'admin/contact/index.html.twig' %}
+
+{% block title %}Nouveau contact{% endblock %}
+
+{% block content %}
+    <h1>Créer un nouveau contact</h1>
+    <br>
+
+<div class="container">
+    
+
+    {{ include('newsletter/_form.html.twig') }}
+    <br>
+
+    <a class="btn btn-primary" href="{{ path('admin_newsletter_index') }}">Retour à la liste</a>
+
+
+</div>
+
+
+{% endblock %}
