@@ -1,4 +1,4 @@
-# CoursSymfony
+# SeRencontrer.com
 Projet avec Symfony.
 
 Back et front office pour un site de rencontres. 
